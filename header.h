@@ -19,20 +19,31 @@ class Company
     int Num_Emp;
 
  public:
-    Company(){ Name="0"; Owners = {"0"}; Income=S=Num_Emp=0;};
-    QString Get_Name () {return Name;};
-    QList<QString> Get_Owners() {return Owners;};
-    double Get_Income() {return Income;};
-    double Get_S() {return S;};
-    int Get_Num_Emp(){return Num_Emp;};
+    Company(){ Name="0"; Owners = {"0"}; Income=S=Num_Emp=0; };
+    Company(QString N, QList<QString> O, double I, double SS, int Num)
+    {
+       Name=N;
+       Owners=O;
+       Income=I;
+       S=SS;
+       Num_Emp=Num;
+    };
 
-    void Set_Name(QString NewName) { Name = NewName;};
-    void Set_Owner(QList<QString> NewOwners) {Owners = NewOwners;} ;
-    void Set_Income(double NewIncome) {Income=NewIncome;};
-    void Set_S(double NewS){S=NewS;};
-    void Set_Num(int NewNum){Num_Emp=NewNum;};
+    enum Type {A=1,B,C};
 
-    virtual QString Get_Type()=0;
+    QString Get_Name () {return Name;}
+    QList<QString> Get_Owners() {return Owners;}
+    double Get_Income() {return Income;}
+    double Get_S() {return S;}
+    int Get_Num_Emp(){return Num_Emp;}
+
+    void Set_Name(QString NewName) { Name = NewName;}
+    void Set_Owner(QList<QString> NewOwners) {Owners = NewOwners;}
+    void Set_Income(double NewIncome) {Income=NewIncome;}
+    void Set_S(double NewS){S=NewS;}
+    void Set_Num(int NewNum){Num_Emp=NewNum;}
+
+    virtual Type Get_Type()=0;
     virtual double Get_Tax()=0;
 };
 
@@ -40,10 +51,10 @@ class Company
 class ReestrP //  класс реестр предприятий
 {
 public:
-    QList<Company> *Company_List;
-    void Delete_P (Company *Comp);// 7
-    void Add_P (Company *Comp);// 7
-    int Get_P (Company *Comp); // ?
+    QList<Company*> Company_List;
+    void Delete_P (Company Comp);// 7
+    void Add_P (Company Comp);// 7
+    Company Get_P (int i); // ?
     int Size_Reester ();
 
 };
@@ -51,22 +62,22 @@ public:
 class Company_A: public Company
 {
 public:
-    QString Get_Type() {return ("Type company: A");};
-    double Get_Tax() {return ((Income+S+Num_Emp)*15/100); };
+    Type Get_Type() {return A;}
+    double Get_Tax() {return ((Income+S+Num_Emp)*15/100); }
 };
 
 
 class Company_B: public Company
 {
 public:
-    QString Get_Type() {return ("Type company: B");};
-    double Get_Tax() {return ((Income+S)*20/100); };
+    Type Get_Type() {return B;}
+    double Get_Tax() {return ((Income+S)*20/100); }
 };
 
 
 class Company_C: public Company
 {
 public:
-    QString Get_Type() {return ("Type company: C");};
-    double Get_Tax() {return ((Income+Num_Emp)*30/100); };
+    Type Get_Type() {return C;}
+    double Get_Tax() {return ((Income+Num_Emp)*30/100); }
 };
