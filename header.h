@@ -38,7 +38,7 @@ class Company
     int Get_Num_Emp(){return Num_Emp;}
 
     void Set_Name(QString NewName) { Name = NewName;}
-    void Set_Owner(QList<QString> NewOwners) {Owners = NewOwners;}
+    void Set_Owner(QList<QString> NewOwners) {Owners = NewOwners;} // const?
     void Set_Income(double NewIncome) {Income=NewIncome;}
     void Set_S(double NewS){S=NewS;}
     void Set_Num(int NewNum){Num_Emp=NewNum;}
@@ -50,11 +50,16 @@ class Company
 
 class ReestrP //  класс реестр предприятий
 {
-public:
+private:
     QList<Company*> Company_List;
+    ReestrP();
+
+public:
+
+   //деструктор?
     void Delete_P (Company Comp);// 7
-    void Add_P (Company Comp);// 7
-    Company Get_P (int i); // ?
+    void Add_P (Company* Comp);
+    Company* Get_P (int i);
     int Size_Reester ();
 
 };
