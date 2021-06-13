@@ -37,8 +37,8 @@ class Company
     double Get_S() {return S;}
     int Get_Num_Emp(){return Num_Emp;}
 
-    void Set_Name(QString NewName) { Name = NewName;}
-    void Set_Owner(QList<QString> NewOwners) {Owners = NewOwners;} // const?
+    void Set_Name(QString NewName) { Name = NewName;} //(const QString &name)
+    void Set_Owner(QList<QString>& NewOwners) {Owners = NewOwners;} // const?
     void Set_Income(double NewIncome) {Income=NewIncome;}
     void Set_S(double NewS){S=NewS;}
     void Set_Num(int NewNum){Num_Emp=NewNum;}
@@ -57,7 +57,7 @@ private:
 public:
 
    //деструктор?
-    void Delete_P (Company Comp);// 7
+    void Delete_P (int i);
     void Add_P (Company* Comp);
     Company* Get_P (int i);
     int Size_Reester ();
@@ -67,22 +67,23 @@ public:
 class Company_A: public Company
 {
 public:
-    Type Get_Type() {return A;}
-    double Get_Tax() {return ((Income+S+Num_Emp)*15/100); }
+    Company_A();
+    Type Get_Type() override;
+    double Get_Tax() override {return ((Income+S+Num_Emp)*15/100); }
 };
 
 
 class Company_B: public Company
 {
 public:
-    Type Get_Type() {return B;}
-    double Get_Tax() {return ((Income+S)*20/100); }
+    Type Get_Type() override;
+    double Get_Tax() override {return ((Income+S)*20/100); }
 };
 
 
 class Company_C: public Company
 {
 public:
-    Type Get_Type() {return C;}
-    double Get_Tax() {return ((Income+Num_Emp)*30/100); }
+    Type Get_Type() override;
+    double Get_Tax() override {return ((Income+Num_Emp)*30/100); }
 };
