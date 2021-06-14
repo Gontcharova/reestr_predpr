@@ -19,7 +19,7 @@ class Company
     int Num_Emp;
 
  public:
-    Company(){ Name="0"; Owners = {"0"}; Income=S=Num_Emp=0; };
+    Company(){ Name="0"; Owners = {"0"}; Income=S=Num_Emp=0.0; };
     Company(QString N, QList<QString> O, double I, double SS, int Num)
     {
        Name=N;
@@ -28,6 +28,8 @@ class Company
        S=SS;
        Num_Emp=Num;
     };
+
+    virtual ~Company(){ };
 
     enum Type {A=1,B,C};
 
@@ -56,7 +58,7 @@ private:
 
 public:
 
-   //деструктор?
+   ~ReestrP();
     void Delete_P (int i);
     void Add_P (Company* Comp);
     Company* Get_P (int i);
@@ -68,6 +70,7 @@ class Company_A: public Company
 {
 public:
     Company_A();
+    Company_A(QString N, QList<QString> O, double I, double SS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+S+Num_Emp)*15/100); }
 };
@@ -76,6 +79,8 @@ public:
 class Company_B: public Company
 {
 public:
+    Company_B();
+    Company_B(QString N, QList<QString> O, double I, double SS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+S)*20/100); }
 };
@@ -84,6 +89,8 @@ public:
 class Company_C: public Company
 {
 public:
+    Company_C();
+    Company_C(QString N, QList<QString> O, double I, double SS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+Num_Emp)*30/100); }
 };
