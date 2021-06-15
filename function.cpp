@@ -42,6 +42,12 @@ int ReestrP::Size_Reester ()
     return Company_List.size();
 }
 
+ReestrP &ReestrP::getInst()
+{
+    static ReestrP Object;
+    return Object;
+}
+
 // класс Company_A
 
 Company_A:: Company_A() :Company()
