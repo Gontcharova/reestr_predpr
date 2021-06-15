@@ -56,12 +56,6 @@ private:
     QList<Company*> Company_List;
     ReestrP();
 
-//запрещаем операции
-
-    ReestrP(const ReestrP&) = delete;
-    ReestrP& operator=(const ReestrP&) = delete;
-    void* operator new(std:: size_t) = delete;
-
 public:
 
    ~ReestrP();
@@ -69,9 +63,6 @@ public:
     void Add_P (Company* Comp);
     Company* Get_P (int i);
     int Size_Reester ();
-
-    static ReestrP& getInst();
-
 
 };
 
