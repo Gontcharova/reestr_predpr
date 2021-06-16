@@ -1,4 +1,3 @@
-
 #define HEADER_H
 
 #include "header.h"
@@ -23,6 +22,7 @@ void ReestrP::Delete_P(int i)
 {
     if(i >= 0 && i < Company_List.size())
         Company_List.removeAt(i);
+    else cout<<"Incorrect index"<<endl;
 }
 
 void ReestrP::Add_P(Company* Comp)
@@ -37,9 +37,15 @@ Company* ReestrP::Get_P (int i)
     else return nullptr;
 }
 
-int ReestrP::Size_Reester ()
+int ReestrP::Size ()
 {
     return Company_List.size();
+}
+
+ReestrP &ReestrP::getInst()
+{
+    static ReestrP Object;
+    return Object;
 }
 
 // класс Company_A
@@ -49,7 +55,7 @@ Company_A:: Company_A() :Company()
 
 }
 
-Company_A:: Company_A(QString N, QList<QString> O, double I, double SS, int Num) :Company (N, O, I, SS, Num)
+Company_A:: Company_A(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num) :Company (NewName, NewOwners, NewIncome, NewS, Num)
 {
 
 }
@@ -65,7 +71,7 @@ Company_B:: Company_B() :Company()
 {
 
 }
-Company_B:: Company_B(QString N, QList<QString> O, double I, double SS, int Num) :Company (N, O, I, SS, Num)
+Company_B:: Company_B(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num) :Company (NewName, NewOwners, NewIncome, NewS, Num)
 {
 
 }
@@ -82,7 +88,7 @@ Company_C:: Company_C() :Company()
 
 }
 
-Company_C:: Company_C(QString N, QList<QString> O, double I, double SS, int Num) :Company (N, O, I, SS, Num)
+Company_C:: Company_C(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num) :Company (NewName, NewOwners, NewIncome, NewS, Num)
 {
 
 }
@@ -90,3 +96,4 @@ Company:: Type Company_C:: Get_Type()
 {
     return Type::C;
 }
+

@@ -20,12 +20,12 @@ class Company
 
  public:
     Company(){ Name="0"; Owners = {"0"}; Income=S=Num_Emp=0.0; };
-    Company(QString N, QList<QString> O, double I, double SS, int Num)
+    Company(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num)
     {
-       Name=N;
-       Owners=O;
-       Income=I;
-       S=SS;
+       Name=NewName;
+       Owners=NewOwners;
+       Income=NewIncome;
+       S=NewS;
        Num_Emp=Num;
     };
 
@@ -56,13 +56,22 @@ private:
     QList<Company*> Company_List;
     ReestrP();
 
+//запрещаем операции
+
+    ReestrP(const ReestrP&) = delete;
+    ReestrP& operator=(const ReestrP&) = delete;
+    void* operator new(std:: size_t) = delete;
+
 public:
 
    ~ReestrP();
     void Delete_P (int i);
     void Add_P (Company* Comp);
     Company* Get_P (int i);
-    int Size_Reester ();
+    int Size ();
+
+    static ReestrP& getInst();
+
 
 };
 
@@ -70,7 +79,7 @@ class Company_A: public Company
 {
 public:
     Company_A();
-    Company_A(QString N, QList<QString> O, double I, double SS, int Num);
+    Company_A(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+S+Num_Emp)*15/100); }
 };
@@ -80,7 +89,7 @@ class Company_B: public Company
 {
 public:
     Company_B();
-    Company_B(QString N, QList<QString> O, double I, double SS, int Num);
+    Company_B(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+S)*20/100); }
 };
@@ -90,7 +99,7 @@ class Company_C: public Company
 {
 public:
     Company_C();
-    Company_C(QString N, QList<QString> O, double I, double SS, int Num);
+    Company_C(QString NewName, QList<QString> NewOwners, double NewIncome, double NewS, int Num);
     Type Get_Type() override;
     double Get_Tax() override {return ((Income+Num_Emp)*30/100); }
 };
